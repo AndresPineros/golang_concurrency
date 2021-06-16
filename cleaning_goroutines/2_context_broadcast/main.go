@@ -47,7 +47,9 @@ func done_channel() {
 
 func main() {
 	fmt.Println("Started context broadcast:")
-	context_broadcast() // Context is better, it automatically broadcasts to all goroutines that they should stop.
+	// Context is better, it automatically broadcasts (by closing the Done() channel) to all goroutines that they should stop.
+	context_broadcast()
 	fmt.Println("Started done channel:")
-	done_channel() // To cancel all child goroutines with the done channel, I need to know how many gouroutines there are.
+	// To cancel all child goroutines with the done channel, I need to know how many gouroutines there are.
+	done_channel()
 }

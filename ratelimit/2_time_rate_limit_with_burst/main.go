@@ -29,6 +29,13 @@ func main() {
 		tick := time.Tick(1 * time.Second)
 		for {
 			select {
+			/*
+				Doing case ch1<- <-ch2 is dangerous because
+				if nobody is listening on ch1 the output of <-ch2 won't
+				be written into ch1 and will be lost.
+
+				It doesn't matter in this case because ticks can be lost.
+			*/
 			case burstChan <- <-tick: // If tick can write to burstchan.
 				fmt.Println("Current burst capacity", len(burstChan))
 			case <-done:

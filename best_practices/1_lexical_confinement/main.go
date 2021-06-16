@@ -14,6 +14,7 @@ func main() {
 
 		In the lexical confinement, it is impossible to break the confinment. The chanOwner function is the only place
 		where data can be written to the channel because it returns a receive-only channel (the <-chan int).
+		Also, it is the only entity in charge of closing the channel.
 	*/
 }
 

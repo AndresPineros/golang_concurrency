@@ -6,6 +6,14 @@ import (
 	"time"
 )
 
+/*
+Buffered channels is the last optimization that should be considered
+because they can hide deadlocks and other concurrency issues.
+
+Little's Law shows that buffering doesn't necessarily improve throughput,
+it just reduces the amount of time the system is in a blocking state.
+*/
+
 func main() {
 	generator := func(done chan interface{}) <-chan int {
 		intStream := make(chan int, 30) // Buffered to make stages independent
