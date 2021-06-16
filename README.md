@@ -4,6 +4,8 @@ Personal notes and exercises on Golang concurrency
 
 ### General thoughts
 
+- APIs should be synchronous. If we create a package that exposes functions, those functions should be synchronous. Go allows wrapping a syncrhonous API in goroutines, to make it asynchronous. DON'T USE CHANNELS IN PUBLIC APIS.
+
 - Whenever I want to write to a channel I should ask "What happens other goroutine is not reading from this channel and it blocks the current goroutine"? This is very important because sometimes we expect something to read from a channel but there's no guarantee. WRITING TO A CHANNEL IS A BLOCKING OPERATION.
 
 - Closing channels is not mandatory but is a general best practice. Channels are cleaned up whenever the GC realizes nothing holds references to them. Thus, closing a channel doesn't really cleanup any resources, it just adds a termination message to the channel.

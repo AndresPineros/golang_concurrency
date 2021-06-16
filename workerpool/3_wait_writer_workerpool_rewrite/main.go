@@ -28,15 +28,19 @@ func produce(ctx context.Context, workerCount int) <-chan int {
 
 					Also, check the or-done pattern.
 				*/
+				done := func() {
+					fmt.Println("Producer", producerId, "done.", "Produced", jobCounter)
+				}
 				select {
 				case <-ctx.Done():
-					fmt.Println("Producer", producerId, "done.", "Produced", jobCounter)
+					done()
 					return
 				case <-time.After(2 * time.Second):
 					fmt.Println("Producer", producerId, "produced job", jobCounter)
 					select {
 					case <-ctx.Done():
-						fmt.Println("Producer", producerId, "done.", "Produced", jobCounter)
+						done()
+						return
 					case channel <- jobCounter:
 						jobCounter++
 					}

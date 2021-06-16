@@ -33,7 +33,7 @@ func produce(ctx context.Context, workerCount int) <-chan int {
 						If nobody is reading from this channel and the Done operations arrives,
 						this goroutine would be blocked and it wouldn't go into the ctx.Done() case.
 
-						Check the rewrite.
+						Check the rewrite in the next example.
 					*/
 					channel <- jobCounter
 					jobCounter++

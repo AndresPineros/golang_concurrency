@@ -28,8 +28,6 @@ func main() {
 		time.Sleep(100 * time.Millisecond)
 	}
 
-	time.Sleep(3 * time.Second) // to make sure all readers are requesting a message from the channel before we write.
-
 	for i := 0; i < 10; i++ {
 		time.Sleep(200 * time.Millisecond)
 		ch <- 0
