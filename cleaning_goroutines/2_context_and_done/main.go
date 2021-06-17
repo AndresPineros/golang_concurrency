@@ -6,6 +6,11 @@ import (
 	"sync"
 )
 
+/*
+context.Context and Done channels both help with cancelling goroutines BUT
+context also has timeout functionalities.
+*/
+
 func context_broadcast() {
 	ctx, cancel := context.WithCancel(context.Background())
 	wg := &sync.WaitGroup{}
@@ -27,7 +32,6 @@ func context_broadcast() {
 func done_channel() {
 	done := make(chan int)
 	wg := &sync.WaitGroup{}
-	gouroutine_count := 2
 	wg.Add(2)
 	go func() {
 		<-done
@@ -39,17 +43,13 @@ func done_channel() {
 		fmt.Println("Second goroutine exited due to done channel")
 		wg.Done()
 	}()
-	for i := 0; i < gouroutine_count; i++ { // I need to know how many there are
-		done <- 1
-	}
+	close(done)
 	wg.Wait()
 }
 
 func main() {
 	fmt.Println("Started context broadcast:")
-	// Context is better, it automatically broadcasts (by closing the Done() channel) to all goroutines that they should stop.
 	context_broadcast()
 	fmt.Println("Started done channel:")
-	// To cancel all child goroutines with the done channel, I need to know how many gouroutines there are.
 	done_channel()
 }
