@@ -2,6 +2,21 @@
 
 Personal notes and exercises on Golang concurrency
 
+### Sources
+
+OReilly's Concurrency in Go
+
+https://www.youtube.com/watch?v=5zXAHh5tJqQ&ab_channel=GopherAcademy
+
+https://www.youtube.com/watch?v=hFqXgmor74k&ab_channel=GopherConIndia
+
+https://golang.org/doc/effective_go#channels
+
+https://www.youtube.com/watch?v=QDDwwePbDtw&ab_channel=GoogleDevelopers
+
+https://www.youtube.com/watch?v=YEKjSzIwAdA&ab_channel=CodingTech
+
+
 ### General thoughts
 
 - APIs should be synchronous. If we create a package that exposes functions, those functions should be synchronous. Go allows wrapping a syncrhonous API in goroutines, to make it asynchronous. DON'T USE CHANNELS IN PUBLIC APIS.
